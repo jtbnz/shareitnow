@@ -1,0 +1,26 @@
+# Deny directory listing
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# URL rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Route /d/{16-char-code} → download.php
+    RewriteRule ^d/([a-f0-9]{16})$ download.php?code=$1 [L,QSA]
+
+    # Block direct access to internals
+    RewriteRule ^(src|data)/  - [F,L]
+</IfModule>
+
+# Block direct access to sensitive files
+<FilesMatch "\.(sqlite|db|log|sh|ini)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>

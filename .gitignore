@@ -1,0 +1,14 @@
+# Uploaded files (live on server, not in git)
+uploads/*
+!uploads/.htaccess
+!uploads/.gitkeep
+
+# SQLite database
+data/*
+!data/.htaccess
+!data/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
