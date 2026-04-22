@@ -72,8 +72,6 @@ $totalSize      = array_sum(array_column($registered, 'filesize'));
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
-
-$setup_warning = file_exists(BASE_PATH . '/setup.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,12 +92,6 @@ $setup_warning = file_exists(BASE_PATH . '/setup.php');
 </nav>
 
 <div class="container">
-
-    <?php if ($setup_warning): ?>
-    <div class="alert alert-error">
-        <strong>Security warning:</strong> <code>setup.php</code> still exists. Delete it from the server immediately.
-    </div>
-    <?php endif; ?>
 
     <?php if ($flash): ?>
     <div class="alert alert-<?= $flash['type'] ?>"><?= htmlspecialchars($flash['msg']) ?></div>

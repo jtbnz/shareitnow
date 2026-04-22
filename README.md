@@ -25,11 +25,11 @@ Built with PHP + SQLite — no framework, no composer dependencies.
 
 ---
 
-## Deployment (Hostinger)
+## Deployment
 
 ### 1. Clone the repo
 
-SSH into your Hostinger account and clone into `public_html`:
+SSH into your host and clone into your web root:
 
 ```bash
 cd public_html
@@ -38,13 +38,9 @@ git clone https://github.com/<your-username>/shareitnow shareitnow
 
 ### 2. First-time setup
 
-Visit `https://kiaora.tech/shareitnow/setup.php` in your browser.
+Visit `https://yourdomain.com/shareitnow/setup.php` in your browser.
 
-Create your admin username and password, then **immediately delete `setup.php` from the server**:
-
-```bash
-rm public_html/shareitnow/setup.php
-```
+Create your admin username and password. Once an account exists, `setup.php` automatically redirects to the admin panel — it cannot be used to create a second account, so there is no need to delete it.
 
 ### 3. Upload files
 
@@ -58,7 +54,7 @@ Direct HTTP access to this directory is blocked — files are only served throug
 
 ### 4. Create share links
 
-Log in at `https://kiaora.tech/shareitnow/admin/`, click **Create Share Link** next to any uploaded file, set the expiry, and copy the generated URL.
+Log in at `https://yourdomain.com/shareitnow/admin/`, click **Create Share Link** next to any uploaded file, set the expiry, and copy the generated URL.
 
 ### 5. Updates
 
@@ -71,7 +67,7 @@ git pull
 
 ## Admin Panel
 
-`https://kiaora.tech/shareitnow/admin/`
+`https://yourdomain.com/shareitnow/admin/`
 
 | Feature | Description |
 |---|---|
@@ -86,7 +82,7 @@ git pull
 ## Share Link Flow
 
 ```
-Recipient visits:  kiaora.tech/shareitnow/d/abc123def456789a
+Recipient visits:  yourdomain.com/shareitnow/d/abc123def456789a
                         ↓
                Landing page — shows filename, size, expiry
                         ↓
@@ -130,4 +126,4 @@ shareitnow/
 - Admin sessions use `session_regenerate_id()` on login
 - All admin POST actions are CSRF-token protected
 - Failed login attempts include a 1-second delay
-- `setup.php` should be deleted from the server after initial setup
+- `setup.php` redirects immediately if an admin account already exists — safe to leave in the repo
